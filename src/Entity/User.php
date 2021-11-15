@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -20,12 +21,12 @@ class User
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $first_name;
+    private string $first_name;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $last_name;
+    private string $last_name;
 
     /**
      * @ORM\OneToOne(targetEntity=Role::class, cascade={"persist", "remove"})
@@ -36,19 +37,19 @@ class User
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $login;
+    private string $login;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $password;
+    private string $password;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFirstName(): ?string
+    public function getFirstName(): string
     {
         return $this->first_name;
     }
@@ -60,7 +61,7 @@ class User
         return $this;
     }
 
-    public function getLastName(): ?string
+    public function getLastName(): string
     {
         return $this->last_name;
     }
@@ -84,7 +85,7 @@ class User
         return $this;
     }
 
-    public function getLogin(): ?string
+    public function getLogin(): string
     {
         return $this->login;
     }
@@ -96,7 +97,7 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -107,4 +108,13 @@ class User
 
         return $this;
     }
+		
+		#[ArrayShape(['firstName' => "string", 'lastName' => "string", 'login' => "string", 'role' => ""])] public function toArray() : array {
+			return [
+				'firstName' => $this->first_name,
+				'lastName' => $this->first_name,
+				'login' => $this->login,
+				'role' => $this->role,
+			];
+		}
 }

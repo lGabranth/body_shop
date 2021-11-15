@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\RoleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * @ORM\Entity(repositoryClass=RoleRepository::class)
@@ -20,34 +21,34 @@ class Role
     /**
      * @ORM\Column(type="boolean")
      */
-    private $canRead;
+    private bool $canRead;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $canWrite;
+    private bool $canWrite;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $canDelete;
+    private bool $canDelete;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $canUpdate;
+    private bool $canUpdate;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCanRead(): ?bool
+    public function getCanRead(): bool
     {
         return $this->canRead;
     }
@@ -59,7 +60,7 @@ class Role
         return $this;
     }
 
-    public function getCanWrite(): ?bool
+    public function getCanWrite(): bool
     {
         return $this->canWrite;
     }
@@ -71,7 +72,7 @@ class Role
         return $this;
     }
 
-    public function getCanDelete(): ?bool
+    public function getCanDelete(): bool
     {
         return $this->canDelete;
     }
@@ -83,7 +84,7 @@ class Role
         return $this;
     }
 
-    public function getCanUpdate(): ?bool
+    public function getCanUpdate(): bool
     {
         return $this->canUpdate;
     }
@@ -95,7 +96,7 @@ class Role
         return $this;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -106,4 +107,15 @@ class Role
 
         return $this;
     }
+		
+		#[ArrayShape(['id' => "", 'name' => "string", 'canRead' => "bool", 'canWrite' => "bool", 'canUpdate' => "bool", 'canDelete' => "bool"])] public function toArray() : array {
+			return [
+				'id' => $this->id,
+				'name' => $this->name,
+				'canRead' => $this->canRead,
+				'canWrite' => $this->canWrite,
+				'canUpdate' => $this->canUpdate,
+				'canDelete' => $this->canDelete,
+			];
+		}
 }
