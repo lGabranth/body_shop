@@ -1,0 +1,9 @@
+#users:
+#  path: /users
+#  controller: App\Controller\UserController::getAll
+#  schemes: https
+#
+#user_get:
+#  path: /user/{id<\d+>?0}
+#  controller: App\Controller\UserController::getUserById
+#  schemes: https
