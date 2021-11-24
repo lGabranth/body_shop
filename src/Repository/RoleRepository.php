@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Role;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -18,6 +20,16 @@ class RoleRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Role::class);
     }
+	
+	/**
+	 * @throws OptimisticLockException
+	 * @throws ORMException
+	 */
+	public function add(Role $role) {
+			$em = $this->getEntityManager();
+			$em->persist($role);
+			$em->flush();
+	}
 
     // /**
     //  * @return Role[] Returns an array of Role objects

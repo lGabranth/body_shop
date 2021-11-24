@@ -13,11 +13,13 @@ class UserController extends AbstractController
     public function index(int $id, UserRepository $repository): Response
     {
 			if ($id === 0 || is_null($user = $repository->find($id))) {
+			
 				die('Invalid user');
+		
 			}
 			
-      return $this->json([
-        'user' => $user->toArray(),
-      ]);
+	      return $this->json([
+	        'user' => $user->toArray(),
+	      ]);
     }
 }
